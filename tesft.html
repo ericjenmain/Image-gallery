@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Loops: Task 1</title>
+    <style>
+      h1 {
+        font-family: helvetica, arial, sans-serif;
+        text-align: center;
+      }
+
+      body {
+        width: 640px;
+        margin: 0 auto;
+      }
+
+      .container {
+        position: relative;
+        display: block;
+        width: 640px;
+        height: 480px;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 640px;
+        height: 480px;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      button {
+        border: 0;
+        background: rgba(150, 150, 150, 0.6);
+        text-shadow: 1px 1px 1px white;
+        border: 1px solid #999;
+        position: absolute;
+        cursor: pointer;
+        top: 2px;
+        left: 2px;
+      }
+
+      .thumbnails img {
+        display: block;
+        width: 20%;
+        float: left;
+        cursor: pointer;
+      }
+    </style>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <h1>Image Gellery Example</h1>
+    <div class="container">
+      <img
+        class="hero"
+        src="https://github.com/ericjenmain/Image-gallery/blob/main/pic1.jpg?raw=true"
+        alt=""
+      />
+      <div class="overlay"></div>
+      <button class="btn">Darken</button>
+    </div>
+
+    <div class="thumbnails"></div>
+  </body>
+
+  <script>
+    /*declare variables */
+
+    const hero = document.querySelector(".hero");
+    const thumbnails = document.querySelector(".thumbnails");
+    const overlay = document.querySelector(".overlay");
+    const btn = document.querySelector("button");
+
+    /*declare array of image file names/locations*/
+    const images = [
+      "https://github.com/ericjenmain/Image-gallery/blob/main/pic1.jpg?raw=true",
+      "https://github.com/ericjenmain/Image-gallery/blob/main/pic2.jpg?raw=true",
+      "https://github.com/ericjenmain/Image-gallery/blob/main/pic3.jpg?raw=true",
+      "https://github.com/ericjenmain/Image-gallery/blob/main/pic4.jpg?raw=true",
+      "https://github.com/ericjenmain/Image-gallery/blob/main/pic5.jpg?raw=true",
+    ];
+
+    /* Looping through images */
+    for (const file of images) {
+      let newImg = document.createElement("img");
+      newImg.setAttribute("src", file);
+      thumbnails.appendChild(newImg);
+      newImg.addEventListener("click", (e) => (hero.src = e.target.src));
+    }
+
+    /* Wiring up the Darken/Lighten button */
+    btn.addEventListener("click", () => {
+      const btnClass = btn.getAttribute("class");
+      if (btnClass === "dark") {
+        btn.setAttribute("class", "light");
+        btn.textContent = "Lighten";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+      } else {
+        btn.setAttribute("class", "dark");
+        btn.textContent = "Darken";
+        overlay.style.backgroundColor = "rgba(0,0,0,0)";
+      }
+    });
+  </script>
+</html>
